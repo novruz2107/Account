@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    username: ${RABBIT_CONNECTION_USERNAME:user}
+    password: ${RABBIT_CONNECTION_PASSWORD:1234}
+    host: ${RABBIT_CONNECTION_IP:localhost}
+    port: ${RABBIT_CONNECTION_PORT:5672}
+
+queue:
+  name:
+    account: new-accounts
+    transaction: new-transactions

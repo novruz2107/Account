@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=account_db
+    ports:
+      - 5432:5432
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=1234
+    ports:
+    - 5672:5672
+    - 15672:15672
+  account:
+    image: novruz21/account
+    restart: always
+    environment:
+      - DB_CONNECTION_IP=postgres
+      - DB_CONNECTION_PORT=5432
+      - DB_CONNECTION_USERNAME=root
+      - DB_CONNECTION_PASSWORD=password
+      - RABBIT_CONNECTION_USERNAME=user
+      - RABBIT_CONNECTION_PASSWORD=1234
+      - RABBIT_CONNECTION_IP=rabbitmq
+      - RABBIT_CONNECTION_PORT=5672
+    ports:
+    - 8080:8080
+volumes:
+  postgres_data:
