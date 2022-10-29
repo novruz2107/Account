@@ -9,6 +9,8 @@ It was built and pushed to DockerHub.
 Dockerfile and docker-compose.yaml files are in the root folder of the project.
 There is also init_db.sql file in order to initiate the database tables of PostgreSQL.
 
+"TUUM.postman_collection.json" postman file could also be found in the root folder. All request samples are provided.
+
 **2) Estimate on how many transactions can handle per second**
 
 In order to estimate that, JMeter was used to make requests to create transactions
